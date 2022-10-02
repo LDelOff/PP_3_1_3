@@ -1,10 +1,7 @@
 package ru.ldeloff.pp_3_1_3.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.ldeloff.pp_3_1_3.dao.RoleDAO;
-import ru.ldeloff.pp_3_1_3.dao.UserDAO;
 import ru.ldeloff.pp_3_1_3.models.Role;
 
 import java.util.List;

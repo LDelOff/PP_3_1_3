@@ -1,9 +1,7 @@
 package ru.ldeloff.pp_3_1_3.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.ldeloff.pp_3_1_3.models.Role;
-import ru.ldeloff.pp_3_1_3.models.User;
 
 import java.util.List;
 
