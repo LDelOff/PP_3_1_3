@@ -31,7 +31,10 @@ public class InitDB implements ApplicationRunner {
         roleService.add(roleUser);
 
         User user = new User();
-        user.setUsername("user");
+        user.setAge(30);
+        user.setEmail("user@ldeloff.ru");
+        user.setFirstName("User");
+        user.setLastName("User");
         user.setPassword("user");
         user.addRole(roleUser);
         userService.add(user);
@@ -41,7 +44,10 @@ public class InitDB implements ApplicationRunner {
         roleService.add(roleAdmin);
 
         User admin = new User();
-        admin.setUsername("admin");
+        admin.setAge(32);
+        admin.setEmail("admin@ldeloff.ru");
+        admin.setFirstName("Admin");
+        admin.setLastName("Admin");
         admin.setPassword("admin");
         admin.addRole(roleAdmin);
         userService.add(admin);
