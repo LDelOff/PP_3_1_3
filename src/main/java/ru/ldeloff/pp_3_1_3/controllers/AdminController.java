@@ -32,18 +32,8 @@ public class AdminController {
     }
 
     @PostMapping(value = "/add")
-    public String add(@RequestParam(name = "firstName") String firstName,
-                      @RequestParam(name = "lastName") String lastName,
-                      @RequestParam(name = "age") int age,
-                      @RequestParam(name = "email") String email,
-                      @RequestParam(name = "password") String password,
+    public String add(@ModelAttribute("userUp") User user,
                       @RequestParam(name = "roleName") String roleName) {
-        User user = new User();
-        user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAge(age);
-        user.setPassword(password);
         user.addRole(roleService.getByName(roleName));
         userService.add(user);
         return "redirect:/admin/";
@@ -57,21 +47,11 @@ public class AdminController {
     }
 
     @PostMapping(value = "/update")
-    public String updateUser(@RequestParam(name = "id") long id,
-                             @RequestParam(name = "firstName") String firstName,
-                             @RequestParam(name = "lastName") String lastName,
-                             @RequestParam(name = "age") int age,
-                             @RequestParam(name = "email") String email,
-                             @RequestParam(name = "password") String password,
+    public String updateUser(@ModelAttribute("userUp") User user,
                              @RequestParam(name = "roleName") String roleName) {
-        User user = userService.getById(id);
-        user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAge(age);
-        user.setPassword(password);
         user.addRole(roleService.getByName(roleName));
         userService.edit(user);
+
         return "redirect:/admin/";
     }
 }
