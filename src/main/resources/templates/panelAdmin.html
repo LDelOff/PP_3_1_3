@@ -91,25 +91,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <th:block th:each="user, stat : ${users}">
+                                    <th:block th:each="userCur : ${users}">
                                         <tr>
-                                            <td th:text="${user.getId()}"></td>
-                                            <td th:text="${user.getFirstName()}"></td>
-                                            <td th:text="${user.getLastName()}"></td>
-                                            <td th:text="${user.getAge()}"></td>
-                                            <td th:text="${user.getEmail()}"></td>
+                                            <td th:text="${userCur.getId()}"></td>
+                                            <td th:text="${userCur.getFirstName()}"></td>
+                                            <td th:text="${userCur.getLastName()}"></td>
+                                            <td th:text="${userCur.getAge()}"></td>
+                                            <td th:text="${userCur.getEmail()}"></td>
                                             <td>
-                                                <span th:each="userRole : ${user.roles}">
+                                                <span th:each="userRole : ${userCur.roles}">
                                                     <p th:text="${#strings.replace(userRole.name, 'ROLE_', '')}"></p>
                                                 </span>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#modalEdit">
+                                                        th:data-target="'#modalEdit' + ${userCur.getId()}">
                                                     Edit
                                                 </button>
                                             </td>
-                                            <div class="modal fade bd-example-modal-lg" id="modalEdit" tabindex="-1"
+                                            <div class="modal fade bd-example-modal-lg" th:id="modalEdit + ${userCur.getId()}" tabindex="-1"
                                                  aria-labelledby="modalEditLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -125,11 +125,9 @@
                                                                 <div class="row">
                                                                     <div class="col-2"></div>
                                                                     <div class="col">
-                                                                        <form action="#"
-                                                                              th:id="updateUser + ${stat.index}"
+                                                                        <form th:id="updateUser + ${userCur.getId()}"
                                                                               th:action="@{/admin/update}"
-                                                                              th:method="post" th:with="userUp=${user}"
-                                                                              th:object="${userUp}">
+                                                                              th:method="post" th:with="userUp=${userCur}">
                                                                             <div class="form-group text-center font-weight-bold">
                                                                                 <label>ID</label>
                                                                                 <input class="form-control form-control-sm"
@@ -194,7 +192,7 @@
                                                             <button type="button" class="btn btn-close btn-secondary"
                                                                     data-dismiss="modal">Close
                                                             </button>
-                                                            <button type="submit" th:form="updateUser + ${stat.index}"
+                                                            <button type="submit" th:form="updateUser + ${userCur.getId()}"
                                                                     class="btn btn-primary">Edit
                                                             </button>
                                                         </div>
@@ -204,12 +202,12 @@
 
                                             <td>
                                                 <button type="button" class="btn btn-danger" data-toggle="modal"
-                                                        data-target="#modalDelete">
+                                                        th:data-target="'#modalDelete' + ${userCur.getId()}">
                                                     Delete
                                                 </button>
                                             </td>
 
-                                            <div class="modal fade bd-example-modal-lg" id="modalDelete" tabindex="-1"
+                                            <div class="modal fade bd-example-modal-lg" th:id="modalDelete + ${userCur.getId()}" tabindex="-1"
                                                  aria-labelledby="modalDeleteLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -227,9 +225,9 @@
                                                                     <div class="col-2"></div>
                                                                     <div class="col">
                                                                         <form action="#"
-                                                                              th:id="deleteUser + ${stat.index}"
-                                                                              th:action="@{/admin/delete(id=${user.getId()})}"
-                                                                              th:method="get" th:with="userUp=${user}">
+                                                                              th:id="deleteUser + ${userCur.getId()}"
+                                                                              th:action="@{/admin/delete(id=${userCur.getId()})}"
+                                                                              th:method="get" th:with="userUp=${userCur}">
                                                                             <div class="form-group text-center font-weight-bold">
                                                                                 <label>ID</label>
                                                                                 <input class="form-control form-control-sm"
@@ -298,7 +296,7 @@
                                                             <button type="button" class="btn btn-close btn-secondary"
                                                                     data-dismiss="modal">Close
                                                             </button>
-                                                            <button type="submit" th:form="deleteUser + ${stat.index}"
+                                                            <button type="submit" th:form="deleteUser + ${userCur.getId()}"
                                                                     class="btn btn-danger">Delete
                                                             </button>
                                                         </div>
