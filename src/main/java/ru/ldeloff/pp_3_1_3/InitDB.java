@@ -32,7 +32,7 @@ public class InitDB implements ApplicationRunner {
 
         User user = new User();
         user.setAge(30);
-        user.setEmail("user@ldeloff.ru");
+        user.setEmail("user@mail.ru");
         user.setFirstName("User");
         user.setLastName("User");
         user.setPassword("user");
@@ -45,7 +45,7 @@ public class InitDB implements ApplicationRunner {
 
         User admin = new User();
         admin.setAge(32);
-        admin.setEmail("admin@ldeloff.ru");
+        admin.setEmail("admin@mail.ru");
         admin.setFirstName("Admin");
         admin.setLastName("Admin");
         admin.setPassword("admin");
