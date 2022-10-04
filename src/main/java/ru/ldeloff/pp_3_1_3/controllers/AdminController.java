@@ -50,13 +50,13 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @GetMapping(value = "/delete")
     public String deleteUser(@RequestParam("id") long id) {
         userService.delete(id);
         return "redirect:/admin/";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @PostMapping(value = "/update")
     public String updateUser(@RequestParam(name = "id") long id,
                              @RequestParam(name = "firstName") String firstName,
                              @RequestParam(name = "lastName") String lastName,
