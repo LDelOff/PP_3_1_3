@@ -5,6 +5,7 @@ import ru.ldeloff.pp_3_1_3.models.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +23,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void add(User user) {
-        entityManager.persist(user);
+        User userCheck = getByEmail(user.getUsername());
+        if (userCheck == null) {
+            entityManager.persist(user);
+        }
     }
 
     @Override
@@ -52,11 +56,23 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getByEmail(String email) {
-        return (User) entityManager.createQuery("FROM User where email = :email").setParameter("email", email).getSingleResult();
+        User user;
+        try {
+            user = (User) entityManager.createQuery("FROM User where email = :email").setParameter("email", email).getSingleResult();
+        } catch (NoResultException e) {
+            user = null;
+        }
+        return user;
     }
 
     @Override
     public User findByName(String userName) {
-        return (User) entityManager.createQuery("FROM User where firstName = :name").setParameter("name", userName).getSingleResult();
+        User user;
+        try {
+            user = (User) entityManager.createQuery("FROM User where firstName = :name").setParameter("name", userName).getSingleResult();
+        } catch (NoResultException e) {
+            user = null;
+        }
+        return user;
     }
 }
